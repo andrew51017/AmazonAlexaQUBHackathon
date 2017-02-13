@@ -1,1 +1,10 @@
-MyIntent hello
+CompleteCaptureIntent i'm done
+CompleteCaptureIntent that's it 
+CompleteCaptureIntent finished 
+CompleteCaptureIntent complete 
+CompleteCaptureIntent that was the last digit
+
+CaptureHexDigitIntent {digit}
+CaptureHexDigitIntent the next digit is {digit}
+CaptureHexDigitIntent then {digit}
+CaptureHexDigitIntent and {digit}

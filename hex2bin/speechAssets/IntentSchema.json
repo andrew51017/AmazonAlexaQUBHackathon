@@ -1,17 +1,16 @@
 {
   "intents": [
     {
-      "intent": "MyIntent",  "slots":[]
+      "intent": "CaptureHexDigitIntent",
+      "slots": [
+        {
+          "name": "digit",
+          "type": "HEXDIGIT"
+        }
+      ]
     },
-
     {
-      "intent": "AMAZON.HelpIntent"
-    },
-    {
-      "intent": "AMAZON.StopIntent"
-    },
-    {
-      "intent": "AMAZON.CancelIntent"
+      "intent": "CompleteCaptureIntent"
     }
   ]
 }
