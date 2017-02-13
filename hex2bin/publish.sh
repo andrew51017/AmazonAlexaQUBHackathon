@@ -11,4 +11,3 @@ rm index.zip
 cd src
 zip -X -r ../index.zip *
 cd ..
-aws lambda update-function-code --function-name Hex2Bin  --zip-file fileb://index.zip

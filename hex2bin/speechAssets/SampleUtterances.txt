@@ -1,3 +1,7 @@
+StartCaptureIntent to convert a number
+StartCaptureIntent convert a number
+StartCaptureIntent convert
+
 CompleteCaptureIntent i'm done
 CompleteCaptureIntent that's it 
 CompleteCaptureIntent finished 
