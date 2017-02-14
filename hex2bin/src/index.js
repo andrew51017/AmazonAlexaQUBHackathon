@@ -16,7 +16,7 @@ const APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
 
 const convertDigitToBinary = function(hex) {
 
-    switch (hex.toUpperCase()) {
+    switch (hex.charAt(0).toUpperCase()) {
         case "0":
             return "zero ,zero ,zero ,zero ";
         case "1": 
@@ -55,7 +55,65 @@ const convertDigitToBinary = function(hex) {
 
 }
 
+const convertDigitToBinaryStr = function(hex) {
+
+    switch (hex.charAt(0).toUpperCase()) {
+        case "0":
+            return "0000";
+        case "1": 
+            return "0001"; 
+        case "2": 
+            return "0010";
+        case "3": 
+            return "0011";
+        case "4": 
+            return "0100";
+        case "5": 
+            return "0101";
+        case "6": 
+            return "0110";
+        case "7": 
+            return "0111";
+        case "8": 
+            return "1000";
+        case "9": 
+            return "1001";
+        case "A": 
+            return "1010";
+        case "B": 
+            return "1011";
+        case "C": 
+            return "1100";
+        case "D": 
+            return "1101";
+        case "E": 
+            return "1110";
+        case "F": 
+            return "1111";
+        default: 
+            return ""; 
+    }
+
+}
+
+const bin2Dec = function(bitStr) {
+
+    var sum = 0;
+    var currentPower = 1; 
+
+    for (var i = bitStr.length - 1; i >= 0; i--) {
+        if (bitStr.charAt(i) == '1') {
+            sum += currentPower; 
+        }
+        currentPower = currentPower * 2; 
+    }
+
+    return sum; 
+
+}
+
 const handlers = {
+
     "CaptureHexDigitIntent": function () {
 
         const readDigit = this.event.request.intent.slots.digit.value; 
@@ -66,12 +124,24 @@ const handlers = {
         }
 
         const binary = convertDigitToBinary(readDigit);
+        const bitStr = convertDigitToBinaryStr(readDigit);
+
+        console.log("Parsed digit: " + readDigit);
+        console.log("Parsed Binary: " + binary);
+        console.log("Parsed BitStr: " + bitStr);
 
         if (!this.attributes["curBin"]) {
             this.attributes["curBin"] = " " + binary; 
         }
         else {
             this.attributes["curBin"] = this.attributes["curBin"] + ", " + binary;
+        }
+
+        if (!this.attributes["curDec"]) {
+            this.attributes["curDec"] = bitStr; 
+        }
+        else {
+            this.attributes["curDec"] = this.attributes["curDec"] + bitStr;
         }
 
         if (!this.attributes["curInput"]) {
@@ -102,15 +172,22 @@ const handlers = {
 
         this.attributes["canConfirm"] = false; 
 
+        console.log("curDec:" + this.attributes["curDec"]);
+
         var bin = this.attributes["curBin"]; 
+        var cd = bin2Dec(this.attributes["curDec"]);
 
         var res = this.event.request.intent.slots.confirm.value;
 
         this.attributes["curBin"] = null; 
         this.attributes["curInput"] = null; 
+        this.attributes["curDec"] = null;
 
         if (res == "yes") {
-            this.emit(':tell', 'The binary number is: ' + bin);
+
+            var combinedOutput = 'The binary number is: ' + bin + '. The decimal number is ' + cd + ". Thank you!";
+
+            this.emit(':tell', combinedOutput);
             this.attributes["capturing"] = false; 
         }
         else {

@@ -1,0 +1,14 @@
+{
+	"projects": [
+		{
+			"name": "AngularJS",
+			"type": "travis",
+			"repo": "angular/angular"
+		},
+		{
+			"name": "Protractor",
+			"type": "travis",
+			"repo": "angular/protractor"
+		}
+	]
+}
