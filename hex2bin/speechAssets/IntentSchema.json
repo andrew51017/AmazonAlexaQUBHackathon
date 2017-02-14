@@ -10,6 +10,15 @@
       ]
     },
     {
+      "intent": "ConfirmInput",
+      "slots": [
+        {
+          "name": "confirm",
+          "type": "CONFIRMATION"
+        }
+      ]
+    },
+    {
       "intent": "StartCaptureIntent"
     },
     {
